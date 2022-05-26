@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>瀑布流升级版</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            background-color: lightpink;
+            margin: 0 auto;
+            position: relative;
+        }
+        li{
+            width: 190px;
+            background-color: lightblue;
+            color: white;
+            font-size: 3em;
+            text-align: center;
+            position: absolute;
+            transition: .3s;
+        }
+    </style>
+</head>
+<body>
+    <ul></ul>
+</body>
+<script>
+    var ul=document.querySelector('ul');
+    var colWidth=200; //虚拟列宽
+    var col=0; //虚拟列数
+    var ulHeight=[];//记录每一个虚拟列的高度
+    var flag=true;
+    function setUl() {
+        //自动设定ul的列数和总宽度
+        col=Math.floor(window.innerWidth/colWidth);
+        ul.style.width=colWidth*col+'px';
+        //模拟各列ul的初始高度
+        //全局作用域下有一个ulHeight数组，其中的值在某一window.innerWidth下已修改，再次调整window.innerWidth需要用这一步来重置ulHeight
+        ulHeight=[];
+        for (var i=0; i<col; i++) {
+            ulHeight.push(0);
+        }  
+    }
+    setUl();
+
+    function setLi() {
+        for (i=0; i<50; i++) {
+            var li=null;
+            var h=0;
+            if (flag) {
+                //第一次加载需要创建li
+                li=document.createElement('li');
+                li.innerHTML=i+1;
+                h=rand(50,300);
+                li.style.height=h+'px';
+                li.style.lineHeight=h+'px';
+                //将li添加到ul中
+                ul.appendChild(li);
+            } else {
+                li=ul.children[i];
+                h=li.offsetHeight;
+            }
+             
+            //配置li的属性-模拟创建的li放入哪一列ul（实际上只有一个ul所以要用定位left和top来实现）
+            var min=getMin();
+            li.style.left=5+min*colWidth+'px';
+            li.style.top=ulHeight[min]+'px';
+            //更新全局作用域下ulHeight数组对应列的高度
+            ulHeight[min]+=(h+5);
+        }
+        flag=false;
+    }
+    setLi();
+
+    //添加resize事件
+    window.onresize=function(){
+        var newCol=Math.floor(window.innerWidth/colWidth);
+        if (newCol==col) {
+            return;
+        } else {
+            setUl();
+            setLi();
+        }
+    } 
+    
+    //获取最小高度‘ul’的下标
+    function getMin() {
+        var min=0;
+        for (var i=1; i<ulHeight.length; i++) {
+            if (ulHeight[min]>ulHeight[i]) {
+                min=i;
+            }
+        }
+       
+        return min;
+    }
+
+    //随机函数
+    function rand(min, max) {
+        return Math.round(Math.random()*(max-min)+min);
+    }
+    console.log(ulHeight);
+</script>
+</html>

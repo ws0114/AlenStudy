@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地存储跟踪</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 400px;
+            /* height: 300px; */
+            border: 1px solid red;
+            padding: 20px;
+        }
+        .form{
+            margin-top: 20px;
+            width: 400px;
+            height: 110px;
+            border-bottom: 1px solid black;
+        }
+        span{
+            margin-right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>localStorage</h1>
+        <div class="form">  
+            <label><span>username: </span><input type="text" name="" id="name"></label>
+            <br>
+            <label><span>destination: </span><input type="text" name="" id="dest"></label>
+            <br>
+            <label><span>transportation: </span><input type="text" name="" id="trans"></label>
+            <br>
+            <button>Clear</button>
+            <button>Go</button>
+        </div>
+        <div class="info"></div>
+    </div>
+</body>
+<script>
+    var ipt=document.querySelectorAll('input');
+    var btn=document.querySelectorAll('button');
+    var info=document.querySelector('.info');
+
+    if(localStorage.flag=='true'){
+        info.innerHTML=`
+        <div><span>username</span><span>${localStorage.getItem('name')}</span></div>
+        <div><span>destination</span><span>${localStorage.getItem('destination')}</span></div>
+        <div><span>transportation</span><span>${localStorage.getItem('transportation')}</span></div>
+        `
+    }
+    
+    btn[1].onclick=function(){
+        
+        localStorage.setItem('flag',true);
+        localStorage.setItem('name',ipt[0].value);
+        localStorage.setItem('destination',ipt[1].value);
+        localStorage.setItem('transportation',ipt[2].value);
+        
+        info.innerHTML=`
+        <div><span>username</span><span>${localStorage.getItem('name')}</span></div>
+        <div><span>destination</span><span>${localStorage.getItem('destination')}</span></div>
+        <div><span>transportation</span><span>${localStorage.getItem('transportation')}</span></div>
+        `
+        for(var i=0;i<ipt.length;i++){
+            ipt[i].value='';
+        }
+    }
+</script>
+</html>

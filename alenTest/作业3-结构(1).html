@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+	<title>new Document</title>
+	<style>
+		.adv{
+			/*只有设置了绝对定位或者固定定位的元素才能通过偏移属性控制其轨迹，并且可以在其他元素上面漂移*/
+			position:absolute;
+			/* position:fixed; */
+			top:0;
+			left:0;
+			width: 282px;
+			height: 164px;
+		}
+		.close{
+			position:absolute;
+			top:5px;
+			right:0;
+		}
+	</style>
+</head>
+<body>
+	<div id="adv" class="adv">
+		<img src="image/adv_lol.jpg" />
+		<img class="close" src="image/close_lol.jpg" />
+	</div>
+	<script>
+		//这里实现代码
+		//设置两个偏移属性的变量
+		console.log(a);
+		let a=1;
+		var adv=document.getElementById('adv');
+		var x=0;
+		var y=0;
+		var xSpeed=2;
+		var ySpeed=1;
+
+
+		function float() {
+		var maxWidth=document.body.clientWidth-282; 
+			if (x<0||x>maxWidth) {
+				xSpeed=-xSpeed;
+			}
+			if (y<0||y>500) {
+				ySpeed=-ySpeed;
+			}
+			console.log(document.body.clientWidth);
+			// console.log(document.body.clientHeight);
+			// console.log(maxHeight);
+			// console.log(maxWidth);
+			x+=xSpeed;
+			y+=ySpeed;
+			adv.style.left=x+'px';
+			adv.style.top=y+'px';
+		}
+
+		setInterval(float,10);
+	</script>
+</body>
+</html>

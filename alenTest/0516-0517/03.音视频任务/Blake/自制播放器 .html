@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自制播放器</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .bg{
+            background-image: url(images/bg.jpg);
+            width: 800px;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .box{
+            position: relative;
+        }
+        .controls{
+            width: 600px;
+            height: 30px;
+            color: rgb(90, 90, 90);
+            background-color: #DBDBDB;
+            position: absolute;
+            bottom: 0;
+            /* display: none; */
+            display: flex;
+        }
+        .play{
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            background-image: url(images/sprite.png);
+            background-position: 0 0;
+
+        }
+        /* 以下为进度条 */
+        .progress{
+            width: 300px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .progbar{
+            width: 280px;
+            height: 16px;
+            background-color: #6e6e6e;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+        .slider{
+            width: 16px;
+            height: 16px;
+            background-image: url(images/handle.png);
+            cursor: pointer;
+            position: absolute;
+            left: 0;
+        }
+        .fill1,.fill2{
+            position: absolute;
+            left: 0;
+            height: 16px;
+            width: 0;
+            background-image: url(images/play-bar.png);
+            background-position: center center;
+        }
+
+        /* 以下为时间 */
+        .time{
+            width: 120px;
+            height: 30px;
+            display: flex;
+            font-size: 12px;
+            line-height: 30px;
+            text-align: center;
+        }
+        .current{
+            width: 55px;
+            height: 30px;
+        }
+        .duration{
+            width: 55px;
+            height: 30px;
+        }
+        .xg{
+            width: 10px;
+            height: 30px;
+        }
+
+        .vol{
+            width: 120px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .trumpet{
+            height: 30px;
+            width: 30px;
+            cursor: pointer;
+            background-image: url(images/sprite.png);
+            background-position: -83px 0;
+        }
+        .volbar{
+            width: 70px;
+            height: 10px;
+            margin-left: 5px;
+            border-radius: 5px;
+            background-color: #6e6e6e;
+            position: relative;
+            overflow: hidden;
+
+        }
+        .volume{
+            width: 10px;
+            height: 10px;
+            background-image: url(images/volume.png);
+            cursor: pointer;
+            position: absolute;
+            left: 60px;
+        }
+        .fill2{
+            width: 65px;
+        }
+        .allScreen{
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            background-image: url(images/sprite.png);
+            background-position: -155px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="box">
+            <video width="600" height="300" poster="media/ice.jpg">
+                <source src="media/iceage4.mp4">
+                <source src="media/iceage4.webm">
+            </video>
+            <div class="controls">
+                <!-- 播放按钮 -->
+                <div class="play"></div>
+                <!-- 进度条 -->
+                <div class="progress">
+                    <div class="progbar">
+                        <div class="fill1"></div>
+                        <div class="slider"></div>
+                    </div>
+                    
+                </div>
+                <!-- 实时播放时间 -->
+                <div class="time">
+                    <div class="current">00:00:00</div>
+                    <div class="xg">/</div>
+                    <div class="duration">00:00:00</div>
+                </div>
+                <!-- 音量调节 -->
+                <div class="vol">
+                    <div class="trumpet"></div>
+                    <div class="volbar">
+                        <div class="fill2"></div>
+                        <div class="volume"></div>
+                    </div>
+                </div>
+                <!-- 全屏 -->
+                <div class="allScreen"></div>
+            </div>
+        </div>
+        
+
+    </div>
+</body>
+<script>
+    var v=document.querySelector('video');
+    var play=document.querySelector('.play');
+    var allScreen=document.querySelector('.allScreen');
+    var trum=document.querySelector('.trumpet');
+    var timer=null;
+    var current=document.querySelector('.current');
+    var dur=document.querySelector('.duration');
+    var slider=document.querySelector('.slider');
+    var fill1=document.querySelector('.fill1');
+    var volume=document.querySelector('.volume');
+    var fill2=document.querySelector('.fill2');
+    var timer2=null;
+    
+    //播放、暂停
+    play.onclick=function(){
+        if(v.paused){
+            v.play();
+            play.style.backgroundPosition='-40px 0';
+            timer=setInterval(function(){
+                showTime();
+            },500);
+        } else {
+            v.pause();
+            play.style.backgroundPosition='0 0';
+            clearInterval(timer);
+        }
+    }
+    
+    //全屏
+    allScreen.onclick=function(){
+        if(v.requestFullscreen){
+            v.requestFullscreen();
+        } else if(v.mozRequestFullscreen){
+            v.mozRequestFullscreen();
+        } else if(v.msRequestFullscreen){
+            v.msRequestFullscreen();
+        } else if(v.oRequestFullscreen){
+            v.oRequestFullscreen();
+        } else if(v.webKitRequestFullscreen){
+            v.webKitRequestFullscreen();
+        }
+    }
+
+    //静音
+    trum.onclick=function(){
+        if(v.muted){
+            v.muted=false;
+            trum.style.backgroundPosition='-83px 0';
+        } else {
+            v.muted=true;
+            trum.style.backgroundPosition='-121px 0';
+        }
+    }
+
+    //显示当前时间
+    function showTime(){
+        var t=v.currentTime;
+        current.innerHTML=formatTime(t);
+    }
+    //格式化时间函数
+    function formatTime(time){
+        var h=toZero(parseInt(time/3600));
+        var m=toZero(parseInt(time%3600/60));
+        var s=toZero(parseInt(time%60));
+        return h+':'+m+':'+s;
+    }
+    //补0函数
+    function toZero(num){
+        return num=num<10?'0'+num:num;
+    }
+    //视频总时长
+    window.onload=function(){
+        dur.innerText=formatTime(v.duration);
+    }
+
+    //进度条
+    slider.onmousedown=function(e1){
+        disX=e1.clientX-140-this.offsetLeft; //进度条左侧到可视区域左边框的距离为140
+        document.onmousemove=function(e2){
+            var L=264;//最大移动距离
+            var l=e2.clientX-140-disX;
+            if(l<0){
+                l=0;
+            }
+            if(l>L){
+                l=L;
+            }
+            slider.style.left=l+'px';
+            fill1.style.width=l+8+'px';
+
+            var ratio=l/L;
+            v.currentTime=ratio*v.duration;
+        }
+    }
+    document.onmouseup=function(){
+        document.onmousemove=null;
+    }
+
+    //音量条
+    volume.onmousedown=function(e1){
+        disX=e1.clientX-this.offsetLeft; 
+        document.onmousemove=function(e2){
+            var L=60;//最大移动距离
+            var l=e2.clientX-disX;
+            if(l<0){
+                l=0;
+            }
+            if(l>L){
+                l=L;
+            }
+            volume.style.left=l+'px';
+            fill2.style.width=l+5+'px';
+
+            var ratio=l/L;
+            v.volume=ratio;
+        }
+    }
+    document.onmouseup=function(){
+        document.onmousemove=null;
+    }
+    
+    //进度条跟随
+    function follow(){
+        fill1.style.width=264*(v.currentTime/v.duration)+8+'px';
+        slider.style.left=264*(v.currentTime/v.duration)+'px';
+    }
+    timer2=setInterval(function(){
+        follow();
+    },30)
+</script>
+</html>

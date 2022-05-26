@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轮播图</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 700px;
+            height: 393px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+        .swiper{
+            width: 4200px;
+            height: 393px;
+            position: absolute;
+            left: -700px;
+        }
+        .swiper img{
+            float: left;
+            width: 700px;
+            height: 393px;
+        }
+        /* #prev{
+            position: absolute;
+            top: 172.5px;
+            left: 0;
+            cursor: pointer;
+        }
+        #next{
+            position: absolute;
+            top: 172.5px;
+            right: 0;
+            cursor: pointer;
+        } */
+        /* .dots{
+            width: 700px;
+            height: 30px;
+            position: absolute;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } */
+        /* .dot{
+            width: 10px;
+            height: 10px;
+            background-color: #fff;
+            border-radius: 50%;
+            margin: 0 15px;
+        }
+        .dot:hover{
+            cursor: pointer;
+        }
+        .checked{
+            background-color: dodgerblue;
+        } */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 图片   -->
+        <div class="swiper">
+            <img src="../img/4.jpg" alt="">
+            <img src="../img/1.jpg" alt="">
+            <img src="../img/2.jpg" alt="">
+            <img src="../img/3.jpg" alt="">
+            <img src="../img/4.jpg" alt="">
+            <img src="../img/1.jpg" alt="">
+        </div>
+        <!-- 按钮 -->
+        <img id="prev" src="../img/sprite_14.png" alt="" onclick="prev()">
+        <img id="next" src="../img/sprite_17.png" alt="" onclick="next()">
+        <!-- 显示点 -->
+        <div class="dots">
+            <div class="dot checked" onclick="toScroll(1)"></div>
+            <div class="dot" onclick="toScroll(2)"></div>
+            <div class="dot" onclick="toScroll(3)"></div>
+            <div class="dot" onclick="toScroll(4)"></div>
+        </div>
+    </div>
+    
+</body>
+<script>
+    // var dswiper=document.querySelector('.swiper');
+    // var dot=document.querySelectorAll('.dot');
+    // console.log(dot);
+    // // 1.自动 每5s自动轮播到下一张
+    // // 2.手动 点击按钮发生动作
+
+    // var timer=null; //每5s
+    // var swiperTimer=null; //切换
+    
+    // var showIndex=1; //当前显示的图片的下标
+    // var myWidth=700; //单位宽度
+
+    // //自动轮播
+    // var autoCount=0; //做一个计数防止自动轮播和手动切换冲突引起轮播不流畅
+    // timer=setInterval(function(){
+    //     autoCount++;
+    //     if(autoCount==10){
+    //         next();
+    //         autoCount=0; //500*10=5s完成一次切换后autoCount归0
+    //     }
+    //     // console.log(showIndex); 
+    // },500);
+
+    // // 下一张
+    // function next(){
+    //     toScroll(showIndex+1);
+
+    // }
+    // // 上一张
+    // function prev(){
+    //     toScroll(showIndex-1);
+    // }
+
+    // //轮播的函数
+    // function toScroll(targetIndex){
+    //     autoCount=0; //手动切换后把autoCount置0，5s后再切换下一张，防止自动轮播和手动切换冲突造成轮播速度不一致
+
+    //     //完成两张图片的切换
+    //     var s=-1*targetIndex*myWidth-dswiper.offsetLeft; //路程
+    //     console.log(dswiper.offsetLeft);
+    //     console.log(s);
+    //     var t=20; //swiperTimer执行20次完成该张到下一张图片的切换，模拟transition效果
+    //     var v=s/t;
+    //     var count=0;
+    //     clearInterval(swiperTimer); //该步骤是防止多次开启定时器造成麻烦，先取消定时器再重新开启
+    //     swiperTimer=setInterval(function(){
+    //         count++;
+    //         var l=dswiper.offsetLeft+v; 
+    //         dswiper.style.left=l+'px';
+    //         if(count==t){//完成了两图切换后需要进行如下操作
+    //             clearInterval(swiperTimer); //会继续执行完下面的代码再停止
+    //             if(targetIndex==0){
+    //                 //需要跳转到倒数第2张
+    //                 targetIndex=4;
+    //             }
+    //             if(targetIndex==5){
+    //                 //需要跳转到第2张
+    //                 targetIndex=1;
+    //             }
+    //             //防止出现偏差，手动给定位,使最后一次偏移到精确的位置
+    //             dswiper.style.left=-1*targetIndex*myWidth+'px';
+                
+    //             //上一个点熄灭
+    //             dot[showIndex-1].className='dot';
+    //             //更新showIndex
+    //             showIndex=targetIndex;
+    //             //当前点点亮
+    //             dot[showIndex-1].className='dot checked';
+    //         }
+            
+    //     },30);
+    // }
+</script>
+</html>

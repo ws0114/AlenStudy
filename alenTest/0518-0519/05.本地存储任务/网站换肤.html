@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网站换肤</title>
+    <style>
+        .box{
+            width: 400px;
+            height: 200px;
+            border: 1px solid red;
+        }
+        .main{
+            width: 350px;
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <button>设置红色背景</button>
+        <button>设置绿色背景</button>
+        <button>设置蓝色背景</button>
+        <div class="main"></div>
+    </div>
+</body>
+<script>
+    var main=document.querySelector('.main');
+    var btn=document.querySelectorAll('button');
+    var color=['red','green','blue'];
+
+    if(localStorage.flag=='true'){
+        main.style.backgroundColor=localStorage.bgc;
+    }
+
+    for(var i=0;i<btn.length;i++){
+        btn[i].index=i;
+        btn[i].onclick=function(){
+            main.style.backgroundColor=color[this.index];
+            localStorage.setItem('bgc',color[this.index]);
+            localStorage.setItem('flag',true);
+        }
+    }
+    
+</script>
+</html>

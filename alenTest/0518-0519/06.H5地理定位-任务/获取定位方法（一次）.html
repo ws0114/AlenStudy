@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地理位置</title>
+</head>
+<body>
+    <button onclick="fun()">点击获取您的位置</button>
+    <div class="box"></div>
+</body>
+<script>
+    //模板
+    // navigator.geolocation.getCurrentPosition(function(pos){
+    //     console.log(pos);
+    // },function(err){
+    //     console.log(err);
+    // },{});
+
+    function fun(){
+        var box=document.querySelector('.box');
+        navigator.geolocation.getCurrentPosition(function(pos){
+            //定位成功时会执行的代码
+            console.log(pos);
+            var html='';
+            html+='经度'+pos.coords.longitude;
+            html+='<br>纬度'+pos.coords.latitude;
+            html+='<br>准确度'+pos.coords.accuracy;
+            html+='<br>时间戳'+pos.timestamp;
+            box.innerHTML=html;
+        },function(err){
+            //定位失败时会执行的代码
+            console.log(err);
+            switch(err.code){
+                case 0:
+                    alert('暂时无法获取你的位置，请稍后再试！');
+                    break;
+                case 1:
+                    alert("您阻止获取位置信息，请点击允许");
+                    break;
+                case 2:
+                    alert('浏览器获取用户信息失败');
+                    break;
+                case 3:
+                    alert('获取位置超时');
+                    break;
+                default:
+                    break;
+            }
+        },{
+            enableHighAccuracy:true,
+            timeout:5000
+        })
+    }
+</script>
+</html>

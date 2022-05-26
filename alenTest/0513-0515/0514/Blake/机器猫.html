@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>机器猫</title>
+    <style>
+        #ca{
+            border: 5px solid red;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="ca" width="500" height="500"></canvas>
+</body>
+<script>
+    var ca=document.getElementById('ca');
+    var pen=ca.getContext('2d');
+    //头 
+    pen.beginPath();
+    pen.arc(250,250,200,0,Math.PI*2);
+    pen.stroke();
+    pen.fillStyle='deepskyblue';
+    pen.fill();
+    //脸
+    pen.beginPath();
+    pen.arc(250,280,130,0,Math.PI*2);
+    pen.stroke();
+    pen.fillStyle='#fff';
+    pen.fill();
+    //眼睛
+    //左
+    pen.beginPath();
+    pen.rect(160,170,80,40);
+    pen.stroke();
+    pen.fillStyle='#fff';
+    pen.fill();
+    pen.beginPath();
+    pen.arc(210,190,15,0,Math.PI*2);
+    pen.fillStyle='black';
+    pen.fill();
+    //右
+    pen.beginPath();
+    pen.rect(260,170,80,40);
+    pen.stroke();
+    pen.fillStyle='#fff';
+    pen.fill();
+    pen.beginPath();
+    pen.arc(290,190,15,0,Math.PI*2);
+    pen.fillStyle='black';
+    pen.fill();
+    //鼻子
+    pen.beginPath();
+    pen.arc(250,240,25,0,Math.PI*2);
+    pen.stroke();
+    pen.fillStyle='red';
+    pen.fill();
+    //嘴巴
+    pen.beginPath();
+    pen.moveTo(250,265);
+    pen.lineTo(250,360);
+    pen.stroke();//连线
+    pen.closePath();//结束路径
+    pen.beginPath();
+    pen.arc(250,280,80,Math.PI/6,Math.PI/6*5);
+    pen.stroke();
+    //胡须
+    // 中线
+    pen.beginPath();
+    pen.moveTo(200,280);
+    pen.lineTo(120,280);
+    pen.stroke();
+    pen.closePath();
+    pen.beginPath();
+    pen.moveTo(300,280);
+    pen.lineTo(380,280);
+    pen.stroke();
+    pen.closePath();
+    //上
+    pen.beginPath();
+    pen.moveTo(200,270);
+    pen.lineTo(120,240);
+    pen.stroke();
+    pen.closePath();
+    pen.beginPath();
+    pen.moveTo(300,270);
+    pen.lineTo(380,240);
+    pen.stroke();
+    pen.closePath();
+    //下
+    pen.beginPath();
+    pen.moveTo(200,290);
+    pen.lineTo(120,320);
+    pen.stroke();
+    pen.closePath();
+    pen.beginPath();
+    pen.moveTo(300,290);
+    pen.lineTo(380,320);
+    pen.stroke();
+    pen.closePath();
+</script>
+</html>

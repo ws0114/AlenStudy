@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>马赛克</title>
+    <style>
+        #ca{
+            border: 3px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="ca" width="800" height="800"></canvas>
+</body>
+<script>
+    var ca=document.getElementById('ca');
+    var pen=ca.getContext('2d');
+    var timer=null;
+    //设置增量
+    var sx=200;
+    var sy=200;
+    
+    // 随机颜色
+    function randomColor(){
+        var r = Math.floor(Math.random()*256);
+		var g = Math.floor(Math.random()*256);
+		var b = Math.floor(Math.random()*256);
+		var rgb = 'rgb('+r+','+g+','+b+')';
+		return rgb;
+    }
+    //刷新页面
+    timer=setInterval(function(){
+        pen.clearRect(0,0,800,800);
+        //奇数行
+    for(var i=0; i<4; i++){
+        var x=0;
+        var y=0;
+        y=y+i*sy;
+        for(var j=1; j<=4; j++){
+            pen.beginPath();
+            pen.rect(x,y,100,100);
+            pen.fillStyle=randomColor();
+            pen.fill();
+            x+=sx;
+        }
+    }
+    //偶数行
+    for(var i=0; i<4; i++){
+        var x=100;
+        var y=100;
+        y=y+i*sy;
+        for(var j=1; j<=4; j++){
+            pen.beginPath();
+            pen.rect(x,y,100,100);
+            pen.fillStyle=randomColor();
+            pen.fill();
+            x+=sx;
+        }
+    }
+    },500)
+</script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表情包</title>
+</head>
+<body>
+    <canvas id="ca" width="350" height="350"></canvas>
+</body>
+<script>
+    var oimg=document.createElement('img');
+    oimg.src='face/1.png';
+    
+    oimg.onload=function(){
+        var ca=document.getElementById('ca');
+        var pen=ca.getContext('2d');
+        pen.drawImage(oimg,50,110,200,200);
+
+        pen.font='30px arial';
+        pen.fillText('今天的我',20,50);
+
+        pen.font='40px arial';
+        pen.fillText('还是一样的帅!',20,90);
+    }
+</script>
+</html>

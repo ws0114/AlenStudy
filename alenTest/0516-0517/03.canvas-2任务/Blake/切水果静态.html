@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>切水果静态</title>
+</head>
+<body>
+    <canvas id="ca" width="640" height="480"></canvas>
+</body>
+<script>
+    var bgi=document.createElement('img');
+    bgi.src='images/background.jpg';
+    var homeMask=document.createElement('img');
+    homeMask.src='images/home-mask.png';
+    var logo=document.createElement('img');
+    logo.src='images/logo.png';
+    var ninja=document.createElement('img');
+    ninja.src='images/ninja.png';
+    var homeDesc=document.createElement('img');
+    homeDesc.src='images/home-desc.png';
+    var homeDesc=document.createElement('img');
+    homeDesc.src='images/home-desc.png';
+    var peach=document.createElement('img');
+    peach.src='images/fruit/peach.png';
+    var dojo=document.createElement('img');
+    dojo.src='images/dojo.png';
+    var onew=document.createElement('img');
+    onew.src='images/new.png';
+    var newGame=document.createElement('img');
+    newGame.src='images/new-game.png';
+    var sandia=document.createElement('img');
+    sandia.src='images/fruit/sandia.png';
+    var quit=document.createElement('img');
+    quit.src='images/quit.png';
+    var boom=document.createElement('img');
+    boom.src='images/fruit/boom.png';
+
+    window.onload=function(){
+        var ca=document.getElementById('ca');
+        var pen=ca.getContext('2d');
+        pen.drawImage(bgi,0,0);
+        pen.drawImage(homeMask,0,0);
+        pen.drawImage(logo,20,0);
+        pen.drawImage(ninja,320,40);
+        pen.drawImage(homeDesc,10,125);
+        pen.drawImage(peach,100,300);
+        pen.drawImage(dojo,45,240);
+        pen.drawImage(onew,180,230);
+        pen.drawImage(newGame,250,240);
+        pen.drawImage(sandia,305,290);
+        pen.drawImage(quit,490,320);
+        pen.drawImage(boom,525,350);
+    }
+    
+
+</script>
+</html>

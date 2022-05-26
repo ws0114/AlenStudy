@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>曲线图</title>
+</head>
+<body>
+    <canvas id="ca" width="200" height="150"></canvas>
+</body>
+<script>
+    var oimg=document.createElement('img');
+    oimg.src='images/backdrop.png';
+    var ca=document.getElementById('ca');
+    var pen=ca.getContext('2d');
+    oimg.onload=function(){
+        pen.drawImage(oimg,0,0);
+        
+        pen.beginPath();
+        pen.moveTo(40,105);
+        pen.lineTo(75,75);
+        pen.stroke();
+        pen.closePath();
+        
+        pen.beginPath();
+        pen.moveTo(75,75);
+        pen.lineTo(100,85);
+        pen.stroke();
+        pen.closePath();
+        
+        pen.beginPath();
+        pen.moveTo(100,85);
+        pen.lineTo(180,25);
+        pen.stroke();
+        pen.closePath();
+
+    }
+    
+</script>
+</html>

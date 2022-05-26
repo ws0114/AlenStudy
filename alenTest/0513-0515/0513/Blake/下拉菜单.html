@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>下拉菜单</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            flex-flow: wrap;
+            align-content: center;
+        }
+        header{
+            /* background-color: skyblue; */
+        }
+        nav{
+            width: 900px;
+            background-color: gray;
+            color: #fff;
+            border-radius: 5px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .box{
+            width: 840px;
+            height: 40px;
+        }
+        .parentMenu{
+            width: 840px;
+            height: 40px;
+            background-color: gray;
+            color: #fff;
+            display: flex;
+        }
+        .parentMenu>li{
+            text-align: center;
+            line-height: 40px;
+            flex: 1;
+            position: relative;
+        }
+        .childMenu{
+            position: absolute;
+            width: 140px;
+            line-height: 40px;
+            background-color: gray;
+            color: #fff;
+            display: none;
+        }
+        .active{
+            background-color: lightgray;
+            color: red ;
+        }
+        li:hover{
+            cursor: pointer;
+        }
+        /* 以上为导航栏 */
+        .container{
+            width: 900px;
+            display: flex;
+            justify-content: space-between;
+        }
+        section>div{
+            width: 700px;
+            height: 100px;
+            border-bottom: 1px solid gray;
+        }
+        h1{
+            font-size: 16px;
+        }
+        aside{
+            width: 150px;
+            /* background-color: aqua; */
+        }
+        aside>ul:nth-child(2){
+            margin-top: 20px;
+        }
+        aside>ul>li{
+            list-style-type: disc;
+            margin-left: 40px;
+        }
+        aside>ul>li:nth-of-type(1){
+            margin-top: 10px;
+        }
+        /* 以上为主体部分 */
+        footer{
+            width: 900px;
+            height: 50px;
+            background-color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        footer span{
+            font-size: 14px;
+            border-right: 1px solid lightgray;
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="box">
+                <ul class="parentMenu">
+                    <li id="first">
+                        <a>首页</a>
+                        <ul class="childMenu">
+                            <li>最新电影</li>
+                            <li>今热特价</li>
+                            <li>电视剧</li>
+                        </ul>
+                    </li>
+                    <li><a>人民网</a></li>
+                    <li><a>央视网</a></li>
+                    <li><a>新闻头条</a></li>
+                    <li><a>八卦娱乐</a></li>
+                    <li><a>军事热点</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <section class="main">
+            <div>
+                <h1>文章标签1</h1>
+            </div>
+            <div>
+                <h1>文章标签2</h1>
+            </div>
+            <div>
+                <h1>文章标签3</h1>
+            </div>
+            <div>
+                <h1>文章标签4</h1>
+            </div>
+            <div>
+                <h1>文章标签5</h1>
+            </div>
+            <div style="border-bottom: none;">
+                <h1>文章标签6</h1>
+            </div>
+        </section>
+        <aside>
+            <ul>
+                <p>最近观看节目</p>
+                <li><a href="#">快乐大本营</a></li>
+                <li><a href="#">天天向上</a></li>
+                <li><a href="#">非诚勿扰</a></li>
+            </ul>
+            <ul>
+                <p>最近火热节目</p>
+                <li><a href="#">中国好声音</a></li>
+                <li><a href="#">爸爸去哪</a></li>
+                <li><a href="#">最强大脑</a></li>
+            </ul>
+        </aside>
+    </div>
+    <footer>
+        <div>
+            <span><a href="#">联系我们</a></span>
+            <span><a href="#">@我们</a></span>
+            <span><a href="#">与我们合作</a></span>
+            <span><a href="#">友情链接</a></span>
+            <span><a href="#">关于本站</a></span>
+            <span><a href="#">常见问题</a></span>
+            <span><a href="#">意见反馈</a></span>
+        </div>
+    </footer>
+</body>
+<script>
+    var first=document.getElementById('first');
+    var childMenu=document.querySelector('.childMenu');
+    var lis=childMenu.children;
+    first.onmouseenter=function(){
+        first.classList.add('active');
+        childMenu.style.display='block';
+    }
+    first.onmouseleave=function(){
+        first.classList.remove('active');
+        childMenu.style.display='none';
+    }
+    for(var i=0;i<lis.length;i++){
+        lis[i].onmouseenter=function(){
+            this.classList.add('active');
+        }
+        lis[i].onmouseleave=function(){
+            this.classList.remove('active');
+        }
+    }
+</script>
+</html>

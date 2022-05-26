@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小米分割线</title>
+    <style>
+        .box{
+            width: 360px;
+            height: 240px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .item{
+            width: 120px;
+            height: 120px;
+            background-color: rgb(83, 75, 75);
+            color: lightgray;
+            line-height: 120px;
+            text-align: center;
+            position: relative;
+        }
+        .ver1::before, .ver3::before{
+            content: '';
+            width: 1px;
+            height: 100px;
+            background-color: lightgray;
+            position: absolute;
+            top: 10px;
+            right: 0;
+        }
+        .ver1::after, .ver2::after{
+            content: '';
+            width: 100px;
+            height: 1px;
+            background-color: lightgray;
+            position: absolute;
+            left: 10px;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="item ver1">选购手机</div>
+        <div class="item ver1">企业团购</div>
+        <div class="item ver2">F码通道</div>
+        <div class="item ver3">米粉卡</div>
+        <div class="item ver3">以旧换新</div>
+        <div class="item">话费充值</div>
+    </div>
+    
+</body>
+</html>

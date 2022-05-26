@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="test" class="hello">123
+    </button>
+</body>
+<script>
+    // const eleTest = document.getElementById("test");
+    // console.log(eleTest.getAttribute("class"));
+    //     eleTest.addEventListener("click",(e)=>{
+    //     console.log(e.type);
+    //     /*通过虚拟函数获取e*/
+    // })
+
+    /*为了避免重复监听，通过外部函数获取event，但是代码会报错(e is not defined)，
+    触发点击事件可以成功运行，如何避免后台一开始报错*/
+
+    /*getEvent在for循环外部，监听只绑定了一次，放在内部监听绑定了4次，为什么
+    let 有自己独立的作用域，for循环内的每次事件都是独立不同的，所以相当于执行了四次，改成var就不会*/
+
+
+    /*为啥getEvent是undefined，不是is not defined，按照let的定义，
+    let有自己的独立作用域，函数提升应该是在for循环内部*/
+
+
+    // for (var i = 0; i < 4; i++) {
+    //     function getEvent() {
+    //         console.log("e");
+    //     }
+    // }
+    // console.log(getEvent());
+    //getEvent()是个函数，执行到log里时候执行了函数所以有e
+
+ 
+    var getEvent=function(){
+        console.log("1");
+    }
+    console.log(getEvent());
+
+    // for (let i = 0; i < 4; i++) {
+    //     function getEvent() {
+    //         console.log("e");
+    //     }
+    // }
+
+
+    // console.log(getEvent);
+    // eleTest.addEventListener("click", getEvent)
+    // function getEvent(e) {
+    //     console.log(e);
+    // }
+
+</script>
+
+</html>

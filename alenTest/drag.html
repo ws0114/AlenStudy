@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            background-color: steelblue;
+        }
+
+
+        .aside {
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .empty {
+            height: 150px;
+            width: 150px;
+            border: solid 3px black;
+            background-color: white;
+        }
+
+        .hovered {
+            background-color: #333;
+            border-color: white;
+            border-style: dashed;
+        }
+
+        .hold {
+            border: solid 5px #ccc;
+        }
+
+        .dragEle {
+            background-image: url('https://source.unsplash.com/random/150x150');
+            height: 144px;
+            width: 144px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="aside">
+        <div class="empty">
+        </div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+        <div class="empty"></div>
+    </div>
+    <div class="dragEle" draggable="true"></div>
+</body>
+<script>
+    const dragEle = document.querySelector(".dragEle")
+    const aside = document.querySelector('.aside')
+
+    //dragstart dragend对于拖拽对象的事件，为用户开始拖拽，结束拖拽
+    dragEle.addEventListener('dragstart', dragStart)
+    dragEle.addEventListener('dragend', dragEnd)
+
+
+    //dragover ,dragenter,dragleave,drop对于目标对象的事件
+    //为拖拽对象处于目标对象上方（每几百毫秒触发一次）,拖拽对象进入目标对象，拖拽对象离开目标对象，拖拽对象落入目标对象
+
+    //dragenter,drageover事件可以判断目标对象是一个有效对象，并且只有取消默认事件，才能触发drop
+    aside.addEventListener('dragover', dragOver)
+    aside.addEventListener('dragenter', dragEnter)
+    aside.addEventListener('dragleave', dragLeave)
+    aside.addEventListener('drop', dragDrop)
+
+
+    function dragStart(e) {
+        this.className += ' hold'
+        setTimeout(() => this.className = 'invisible', 0)
+        console.log(e.target);
+    }
+
+    function dragEnd(e) {
+        this.className='dragEle'
+        console.log(e.target);
+    }
+
+    function dragOver(e) {
+        e.preventDefault()
+        // console.log(e.target);
+    }
+
+    function dragEnter(e) {
+        e.preventDefault()
+        console.log(e.target);
+
+    }
+
+    function dragLeave(e) {
+        console.log(e.target);
+    }
+
+    function dragDrop(e) {
+        const firstEle=document.querySelector('.aside').firstChild
+        dragEle.className="dragEle"
+        let clonEle=dragEle.cloneNode(true)
+        this.insertBefore(clonEle,firstEle)
+        console.log(e.target);
+    }
+
+
+</script>
+
+</html>

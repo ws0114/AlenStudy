@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作业1-4</title>
+</head>
+<body>
+    <button onclick="stop()">停止</button>
+</body>
+<script>
+
+//let 1 单独作用域内 2 只能声明一次，不能重复声明 3 存在暂时死区无法提升（var 提升声明时先创建变量初始化为undefined，再进行赋值，而let提升创建，初始化和赋值是同时的）
+
+
+console.log(a);
+		let a=1;
+
+// for(let i=0;i<5;i++){
+// setTimeout(() => {
+//     console.log(i);
+// }, 3000);
+// }
+//(for循环每个都是单独的作用域)
+// console.log(i);
+</script>
+</html>
